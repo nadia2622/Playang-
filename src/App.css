@@ -1,0 +1,490 @@
+/* App.css - Enhancements for Playang React Components & Dialogue Gameplay */
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.transition-all {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tracking-wider {
+  letter-spacing: 0.06em;
+}
+
+.character-custom-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.character-custom-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(210, 159, 34, 0.7) !important;
+  box-shadow: 0 16px 36px rgba(210, 159, 34, 0.25) !important;
+}
+
+.character-custom-card:hover .character-portrait {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.character-portrait {
+  transition: transform 0.4s ease;
+}
+
+.modal-backdrop-custom {
+  animation: fadeInBackdrop 0.25s ease-out;
+}
+
+.modal-dialog-custom {
+  animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   MOTION GAMEPLAY WAYANG KULIT (Sistem Animasi Suasana Panggung & Interaksi)
+   ========================================================================== */
+
+/* 1. Kelap-kelip Hangat Lampu Blencong (Ambient Stage Glow) */
+.blencong-flicker {
+  animation: blencongLight 5s ease-in-out infinite alternate;
+}
+
+@keyframes blencongLight {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.98);
+    filter: drop-shadow(0 0 45px rgba(210, 159, 34, 0.4));
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 65px rgba(243, 208, 121, 0.55));
+  }
+  100% {
+    opacity: 0.60;
+    transform: scale(1.00);
+    filter: drop-shadow(0 0 50px rgba(210, 159, 34, 0.45));
+  }
+}
+
+/* 2. Gerak Putar & Sabetan Dalang Sungguhan (3D Solah Wayang Kulit) */
+.stage-character-center,
+.wayang-puppet-container {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* Motion Utama: Wayang berputar dan meliuk luwes seolah digerakkan cempurit dalang */
+.wayang-dalang-motion {
+  animation: solahDalang 6.5s ease-in-out infinite;
+  transform-origin: bottom center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  cursor: grab;
+}
+
+@keyframes solahDalang {
+  0% {
+    transform: rotateY(0deg) rotateZ(0deg) translateY(0);
+  }
+  16% {
+    /* Dalang memelintir tangkai wayang ke kanan */
+    transform: rotateY(20deg) rotateZ(2.8deg) translateY(-8px);
+  }
+  32% {
+    /* Menancap/menapak lembut di panggung debog */
+    transform: rotateY(6deg) rotateZ(0.6deg) translateY(-2px);
+  }
+  48% {
+    /* Memutar balik ke kiri dengan profil pipih wayang kulit */
+    transform: rotateY(-22deg) rotateZ(-3.2deg) translateY(-11px);
+  }
+  68% {
+    /* Putaran anggun menghadap penonton */
+    transform: rotateY(10deg) rotateZ(1.2deg) translateY(-5px);
+  }
+  84% {
+    transform: rotateY(-6deg) rotateZ(-0.8deg) translateY(-1px);
+  }
+  100% {
+    transform: rotateY(0deg) rotateZ(0deg) translateY(0);
+  }
+}
+
+/* 3. Gerak Putar Tokoh Kiri Saat Berdialog (Solah Wicara Kiri) */
+.wayang-speaking-left {
+  animation: solahBicaraKiri 3.8s ease-in-out infinite;
+  transform-origin: bottom right;
+  cursor: grab;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+@keyframes solahBicaraKiri {
+  0% {
+    transform: rotateY(0deg) rotateZ(0deg) translateY(0);
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.8));
+  }
+  24% {
+    /* Memutar tubuh ke arah lawan bicara */
+    transform: rotateY(24deg) rotateZ(3.5deg) translateY(-9px) scale(1.02);
+    filter: drop-shadow(0 16px 32px rgba(210, 159, 34, 0.45));
+  }
+  48% {
+    /* Mengangguk/menegaskan petuah */
+    transform: rotateY(12deg) rotateZ(1.5deg) translateY(-4px) scale(1.01);
+    filter: drop-shadow(0 12px 25px rgba(210, 159, 34, 0.3));
+  }
+  74% {
+    /* Sedikit condong rileks */
+    transform: rotateY(-10deg) rotateZ(-1.8deg) translateY(-6px) scale(1.015);
+    filter: drop-shadow(0 14px 28px rgba(210, 159, 34, 0.35));
+  }
+  100% {
+    transform: rotateY(0deg) rotateZ(0deg) translateY(0);
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.8));
+  }
+}
+
+/* 4. Gerak Putar Tokoh Kanan Saat Berdialog (Solah Wicara Kanan) */
+.wayang-speaking-right {
+  animation: solahBicaraKanan 3.8s ease-in-out infinite;
+  transform-origin: bottom left;
+  cursor: grab;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+@keyframes solahBicaraKanan {
+  0% {
+    transform: rotateY(0deg) rotateZ(0deg) translateY(0);
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.8));
+  }
+  24% {
+    /* Memutar tubuh merespons lawan bicara */
+    transform: rotateY(-24deg) rotateZ(-3.5deg) translateY(-9px) scale(1.02);
+    filter: drop-shadow(0 16px 32px rgba(210, 159, 34, 0.45));
+  }
+  48% {
+    transform: rotateY(-12deg) rotateZ(-1.5deg) translateY(-4px) scale(1.01);
+    filter: drop-shadow(0 12px 25px rgba(210, 159, 34, 0.3));
+  }
+  74% {
+    transform: rotateY(10deg) rotateZ(1.8deg) translateY(-6px) scale(1.015);
+    filter: drop-shadow(0 14px 28px rgba(210, 159, 34, 0.35));
+  }
+  100% {
+    transform: rotateY(0deg) rotateZ(0deg) translateY(0);
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.8));
+  }
+}
+
+/* 5. Aksi Putar Sabetan 360° Saat Tokoh Diklik Pemain */
+.wayang-spin-active {
+  animation: putaranSabetan360 0.85s cubic-bezier(0.175, 0.885, 0.32, 1.25) !important;
+}
+
+@keyframes putaranSabetan360 {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+  30% {
+    transform: rotateY(180deg) scale(1.15) translateY(-20px);
+  }
+  70% {
+    transform: rotateY(360deg) scale(1.05) translateY(-6px);
+  }
+  100% {
+    transform: rotateY(360deg) scale(1) translateY(0);
+  }
+}
+
+/* Hover Interaktif: Pemain dapat memiringkan wayang seperti memainkan langsung */
+.wayang-dalang-motion:hover {
+  transform: rotateY(28deg) rotateZ(4.5deg) translateY(-14px) scale(1.08) !important;
+  filter: drop-shadow(0 20px 35px rgba(243, 208, 121, 0.65)) !important;
+}
+
+.wayang-speaking-left:hover {
+  transform: rotateY(30deg) rotateZ(5deg) translateY(-14px) scale(1.08) !important;
+  filter: drop-shadow(0 20px 35px rgba(243, 208, 121, 0.65)) !important;
+}
+
+.wayang-speaking-right:hover {
+  transform: rotateY(-30deg) rotateZ(-5deg) translateY(-14px) scale(1.08) !important;
+  filter: drop-shadow(0 20px 35px rgba(243, 208, 121, 0.65)) !important;
+}
+
+/* 4. Gelembung Dialog Mengambang (Speech Bubble Pop & Float) */
+.bubble-float {
+  animation: popInBubble 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.25), floatBubble 3.5s ease-in-out infinite 0.5s alternate;
+}
+
+@keyframes popInBubble {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes floatBubble {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 5. Transisi Muncul Kotak Narasi Pembuka */
+.narator-glass-box {
+  animation: naratorSlideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes naratorSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 6. Animasi Kartu Pilihan Dalang (Choice Option Motion & Hover) */
+.choice-card-btn {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.choice-card-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(243, 208, 121, 0.12), transparent);
+  transition: left 0.6s ease;
+}
+
+.choice-card-btn:hover {
+  transform: translateY(-4px) scale(1.012);
+  border-color: rgba(243, 208, 121, 0.7) !important;
+  box-shadow: 0 14px 32px rgba(210, 159, 34, 0.3) !important;
+  background: linear-gradient(135deg, rgba(38, 42, 48, 0.95) 0%, rgba(28, 30, 34, 0.98) 100%) !important;
+}
+
+.choice-card-btn:hover::before {
+  left: 150%;
+}
+
+.choice-card-btn:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Efek Muncul Berjenjang (Stagger) pada Pilihan */
+.choice-stagger-1 {
+  animation: choiceEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+.choice-stagger-2 {
+  animation: choiceEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+.choice-stagger-3 {
+  animation: choiceEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+}
+
+@keyframes choiceEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 7. Tombol Panah Navigasi Layar Game (Breathing Pulse) */
+.game-nav-arrow {
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  animation: arrowGlow 3s infinite ease-in-out;
+}
+
+.game-nav-arrow:hover {
+  transform: translateY(-50%) scale(1.15) !important;
+  border-color: #f7d788 !important;
+  box-shadow: 0 0 25px rgba(243, 208, 121, 0.6) !important;
+  background: rgba(30, 34, 38, 0.95) !important;
+}
+
+@keyframes arrowGlow {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(210, 159, 34, 0.4);
+  }
+}
+
+/* 8. Partikel Kilau Pijar Kelir (Ambient Floating Embers) */
+.stage-ember {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(243, 208, 121, 0.7);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(243, 208, 121, 0.9);
+  pointer-events: none;
+  animation: floatEmber 8s linear infinite;
+}
+
+@keyframes floatEmber {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-50px) translateX(40px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* 9. Tombol Kontrol Bawah (Hover Micro-Bounce) */
+.game-bottom-bar button {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.game-bottom-bar button:hover {
+  transform: translateY(-3px);
+  opacity: 1 !important;
+}
+
+.game-bottom-bar button:hover i {
+  filter: drop-shadow(0 0 8px rgba(243, 208, 121, 0.8));
+}
+
+/* Custom Scrollbars in Modals & Stage */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(210, 159, 34, 0.4);
+  border-radius: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(210, 159, 34, 0.8);
+}
+
+/* ==========================================================================
+   10. KARTU STATISTIK RINGKASAN DATA (PREMIUM CULTURAL STAT BOX)
+   ========================================================================== */
+.stat-card-premium {
+  background: linear-gradient(145deg, rgba(28, 31, 36, 0.95) 0%, rgba(18, 20, 24, 0.98) 100%);
+  border: 1px solid rgba(210, 159, 34, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(210, 159, 34, 0.7) 50%, transparent 100%);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card-premium:hover {
+  transform: translateY(-5px);
+  border-color: rgba(210, 159, 34, 0.6);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6), 0 0 18px rgba(210, 159, 34, 0.15);
+}
+
+.stat-card-premium:hover::before {
+  opacity: 1;
+}
+
+.stat-card-premium .stat-icon-badge {
+  width: 42px;
+  height: 42px;
+  background: rgba(210, 159, 34, 0.12);
+  border: 1px solid rgba(210, 159, 34, 0.3);
+  color: #f7d788;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.stat-card-premium:hover .stat-icon-badge {
+  transform: scale(1.08) rotate(4deg);
+  background: rgba(210, 159, 34, 0.24);
+  color: #ffffff;
+  border-color: rgba(210, 159, 34, 0.65);
+}
+
+.stat-card-premium .stat-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  letter-spacing: 0.02em;
+}
+
+.stat-card-premium .stat-number-display {
+  display: block;
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 12px 0 6px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #fce8a6 45%, #d29f22 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(210, 159, 34, 0.3));
+}
+
+.stat-card-premium .stat-desc {
+  font-size: 0.8rem;
+  color: #a1a1aa;
+  line-height: 1.45;
+  margin: 0;
+}

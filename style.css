@@ -271,9 +271,9 @@ a:hover {
 }
 
 .logo-icon {
-  width: 28px;
-  height: 28px;
-  fill: var(--gold-primary);
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(210, 159, 34, 0.5));
 }
 
