@@ -1,0 +1,1091 @@
+/* ==========================================================================
+   PLAYANG - Landing Page Stylesheet
+   Modern Cultural Heritage Design (HTML & CSS Only)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Javanese:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* --- CSS Variables / Design Tokens --- */
+:root {
+  --bg-primary: #121416;
+  --bg-surface: #17191b;
+  --bg-card: rgba(28, 30, 34, 0.7);
+  --bg-card-hover: rgba(38, 41, 46, 0.85);
+
+  --gold-primary: #d29f22;
+  --gold-light: #f3d079;
+  --gold-dark: #a37512;
+  --gold-gradient: linear-gradient(135deg, #f7d788 0%, #d29f22 50%, #a87913 100%);
+  --gold-glow: rgba(210, 159, 34, 0.35);
+
+  --text-primary: #ffffff;
+  --text-secondary: #e7f2ef;
+  --text-muted: #9ea4ab;
+  --text-dim: #6b7280;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(210, 159, 34, 0.3);
+  --border-gold-bright: rgba(210, 159, 34, 0.7);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  --container-max: 1200px;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Reset & Global --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+/* --- Utilities --- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: var(--container-max) !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: var(--container-max) !important;
+  }
+}
+
+.gold-text {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   MEGAMENDUNG CLOUD ACCESSORIES (Subtle Atmospheric Batik Motif)
+   ========================================================================== */
+.megamendung {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  opacity: 0.13; /* Lembut, transparan dan tidak terlalu tebal */
+  filter: contrast(1.1);
+  transition: opacity 0.3s ease;
+}
+
+.flip-x {
+  transform: scaleX(-1);
+}
+
+/* Hero Section Clouds */
+.mega-hero-left {
+  top: 80px;
+  left: -80px;
+  width: 380px;
+}
+
+.mega-hero-right {
+  top: 160px;
+  right: -90px;
+  width: 400px;
+}
+
+/* Punakawan Section Clouds */
+.mega-punakawan-left {
+  top: -40px;
+  left: -70px;
+  width: 340px;
+}
+
+.mega-punakawan-right {
+  top: 60px;
+  right: -80px;
+  width: 360px;
+}
+
+/* CTA Section Cloud */
+.mega-cta-accent {
+  bottom: -30px;
+  right: 20px;
+  width: 300px;
+  opacity: 0.12;
+  z-index: 2;
+}
+
+/* Semar Spotlight Clouds (Persis Figma Screenshot 1) */
+.mega-semar-top {
+  top: -30px;
+  right: 20px;
+  width: 420px;
+  opacity: 0.15;
+}
+
+.mega-semar-bottom {
+  bottom: 30px;
+  left: -60px;
+  width: 340px;
+  opacity: 0.12;
+}
+
+/* Character Selector Clouds */
+.mega-select-left {
+  top: 40px;
+  left: -80px;
+  width: 340px;
+}
+
+.mega-select-right {
+  top: 90px;
+  right: -80px;
+  width: 340px;
+}
+
+/* Footer Section Clouds (Persis Figma Screenshot 3) */
+.mega-footer-left {
+  top: 60px;
+  left: -50px;
+  width: 360px;
+  opacity: 0.15;
+}
+
+.mega-footer-right {
+  top: 60px;
+  right: -50px;
+  width: 360px;
+  opacity: 0.15;
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 32px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-pill {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.btn-pill:hover,
+.btn-pill:focus,
+.btn-pill:active {
+  background: rgba(210, 159, 34, 0.15) !important;
+  border-color: var(--gold-light) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px var(--gold-glow) !important;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   1. NAVBAR
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 22px 0;
+  background: linear-gradient(180deg, rgba(18, 20, 22, 0.92) 0%, rgba(18, 20, 22, 0) 100%);
+  backdrop-filter: blur(10px);
+}
+
+.site-header.navbar {
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none !important;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  fill: var(--gold-primary);
+  filter: drop-shadow(0 0 8px rgba(210, 159, 34, 0.5));
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin-bottom: 0;
+}
+
+.nav-link {
+  color: var(--text-muted) !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: relative;
+  padding: 4px 0 !important;
+  background: transparent !important;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link.active {
+  color: #ffffff !important;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 2px;
+  background: var(--gold-primary);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--gold-primary);
+}
+
+.navbar-toggler {
+  border: 1px solid var(--border-gold) !important;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  transition: var(--transition);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 12px var(--gold-glow) !important;
+  border-color: var(--gold-light) !important;
+}
+
+/* ==========================================================================
+   2. HERO SECTION
+   ========================================================================== */
+.hero-section {
+  padding-top: 140px;
+  padding-bottom: 90px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.hero-brand {
+  font-size: clamp(3.2rem, 7vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: 0.04em;
+  text-shadow: 0 4px 30px rgba(210, 159, 34, 0.3);
+}
+
+.hero-subtitle {
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-cta {
+  margin-bottom: 60px;
+}
+
+/* Hero 5-Card Curved Gallery */
+.hero-gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 20px;
+  perspective: 1000px;
+}
+
+.gallery-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: var(--transition);
+  background: #1e2024;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+
+.gallery-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  border-color: var(--gold-light);
+  box-shadow: 0 20px 45px rgba(210, 159, 34, 0.25);
+  z-index: 5;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Staggered Heights for Natural Hero Arc */
+.card-side-outer {
+  width: 160px;
+  height: 220px;
+}
+
+.card-side-inner {
+  width: 180px;
+  height: 250px;
+}
+
+.card-center {
+  width: 210px;
+  height: 285px;
+  border-color: rgba(210, 159, 34, 0.5);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(210, 159, 34, 0.2);
+}
+
+/* ==========================================================================
+   3. PUNAKAWAN SECTION
+   ========================================================================== */
+.punakawan-section {
+  padding: 100px 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header {
+  text-align: left;
+  max-width: 780px;
+  margin-bottom: 45px;
+}
+
+.section-title {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  line-height: 1.7;
+}
+
+.story-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.story-card {
+  position: relative;
+  height: 380px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transition: var(--transition);
+  cursor: pointer;
+  background: #1c1e22;
+}
+
+.story-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(18,20,22,0.1) 0%, rgba(18,20,22,0.5) 45%, rgba(195,142,20,0.85) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 36px 32px;
+  transition: var(--transition);
+}
+
+.story-title {
+  color: #ffffff;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.35;
+  max-width: 380px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.story-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold-light);
+  box-shadow: 0 25px 50px rgba(210, 159, 34, 0.3);
+}
+
+.story-card:hover img {
+  transform: scale(1.06);
+}
+
+.story-card:hover .story-overlay {
+  background: linear-gradient(180deg, rgba(18,20,22,0.1) 0%, rgba(18,20,22,0.4) 40%, rgba(210,159,34,0.92) 100%);
+}
+
+/* ==========================================================================
+   4. CTA SECTION ("Udah kenal mereka semua, kan?")
+   ========================================================================== */
+.cta-section {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-banner {
+  position: relative;
+  min-height: 480px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #141618;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Dalang Background Composition */
+.cta-bg-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 65%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cta-bg-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: contrast(1.08) brightness(0.92);
+}
+
+.cta-bg-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #141618 0%, rgba(20,22,24,0.7) 40%, rgba(20,22,24,0.1) 100%),
+              linear-gradient(180deg, rgba(20,22,24,0.5) 0%, rgba(20,22,24,0) 30%, rgba(20,22,24,0.8) 100%);
+  z-index: 1;
+}
+
+/* Frosted Glass CTA Card */
+.cta-glass-card {
+  position: relative;
+  z-index: 3;
+  max-width: 480px;
+  margin-left: 60px;
+  padding: 44px 42px;
+  background: rgba(23, 25, 28, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.cta-title {
+  color: #ffffff;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+.cta-desc {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.cta-glass-card .btn-pill {
+  padding: 12px 36px;
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   5. CHARACTER SPOTLIGHT (SEMAR HERO)
+   ========================================================================== */
+.character-spotlight-section {
+  padding: 110px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.spotlight-text {
+  flex: 1;
+}
+
+.spotlight-title {
+  font-size: clamp(3.4rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: 0.03em;
+}
+
+.spotlight-subtitle {
+  color: var(--text-secondary);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.spotlight-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.spotlight-glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(210, 159, 34, 0.4) 0%, rgba(210, 159, 34, 0.05) 60%, rgba(0, 0, 0, 0) 75%);
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.spotlight-character {
+  position: relative;
+  z-index: 1;
+  max-width: 440px;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7));
+  transition: transform 0.5s ease;
+}
+
+.spotlight-character:hover {
+  transform: scale(1.03) translateY(-4px);
+}
+
+.spotlight-bottom-call {
+  text-align: center;
+  margin-top: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.spotlight-bottom-call span {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   6. CHARACTER SELECTOR ("Pilih Karakter Kamu!")
+   ========================================================================== */
+.character-select-section {
+  padding: 80px 0 130px;
+  position: relative;
+  overflow: hidden;
+}
+
+.character-select-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 55px;
+  position: relative;
+  z-index: 2;
+}
+
+.character-select-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.character-select-desc {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.character-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.char-card {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #191c20;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 20px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.char-backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(25, 28, 32, 0.5) 0%, rgba(25, 28, 32, 0.8) 45%, rgba(195, 142, 20, 0.85) 100%);
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.char-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: radial-gradient(ellipse at bottom, rgba(243, 208, 121, 0.35) 0%, rgba(0,0,0,0) 70%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.char-image-wrapper {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  padding: 10px;
+}
+
+.char-image-wrapper img {
+  max-height: 100%;
+  max-width: 88%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.char-info {
+  position: relative;
+  z-index: 4;
+}
+
+.char-name {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.char-moniker {
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.35;
+  opacity: 0.95;
+}
+
+.char-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--gold-light);
+  box-shadow: 0 25px 50px rgba(210, 159, 34, 0.35);
+}
+
+.char-card:hover .char-backdrop {
+  background: linear-gradient(180deg, rgba(25, 28, 32, 0.3) 0%, rgba(25, 28, 32, 0.7) 40%, rgba(210, 159, 34, 0.95) 100%);
+}
+
+.char-card:hover .char-image-wrapper img {
+  transform: scale(1.08) translateY(-6px);
+}
+
+/* ==========================================================================
+   7. FOOTER SECTION
+   ========================================================================== */
+.site-footer {
+  position: relative;
+  padding: 110px 0 50px;
+  background-color: #121416;
+  overflow: hidden;
+  text-align: center;
+}
+
+.footer-stage-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.footer-stage-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  opacity: 0.5;
+  filter: brightness(0.65) contrast(1.15);
+}
+
+.footer-stage-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #17191b 0%, rgba(18,20,22,0.4) 30%, rgba(18,20,22,0.7) 70%, #121416 100%);
+  z-index: 1;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  font-size: clamp(3.2rem, 7vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+  text-shadow: 0 4px 30px rgba(210, 159, 34, 0.4);
+}
+
+/* Javanese Script (Aksara Jawa) */
+.aksara-jawa {
+  font-family: 'Noto Sans Javanese', serif;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  margin-bottom: 36px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+  line-height: 1.5;
+}
+
+/* Social Media Glass Icons */
+.footer-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
+.social-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: var(--transition);
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  transition: var(--transition);
+}
+
+.social-btn:hover {
+  background: rgba(210, 159, 34, 0.25);
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 6px 20px var(--gold-glow);
+}
+
+.footer-copyright {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .megamendung {
+    opacity: 0.10;
+    max-width: 260px;
+  }
+  .hero-gallery {
+    gap: 12px;
+  }
+  .card-side-outer {
+    width: 120px;
+    height: 170px;
+  }
+  .card-side-inner {
+    width: 140px;
+    height: 200px;
+  }
+  .card-center {
+    width: 170px;
+    height: 235px;
+  }
+  .char-card {
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .megamendung {
+    opacity: 0.08;
+    max-width: 190px;
+  }
+  .site-header {
+    padding: 16px 0;
+  }
+  .site-header .navbar-collapse {
+    background: rgba(20, 22, 25, 0.96);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-md);
+    padding: 18px 24px;
+    margin-top: 14px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+  }
+  .site-header .main-nav {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .story-card {
+    height: 300px;
+  }
+  .cta-banner {
+    flex-direction: column;
+    padding: 40px 20px;
+    min-height: auto;
+  }
+  .cta-bg-visual {
+    width: 100%;
+    opacity: 0.35;
+  }
+  .cta-glass-card {
+    margin-left: 0;
+    padding: 28px 24px;
+    max-width: 100%;
+  }
+  .spotlight-wrapper {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+  .spotlight-character {
+    max-width: 300px;
+  }
+  .char-card {
+    height: 380px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .hero-gallery {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card-side-outer {
+    display: none;
+  }
+  .card-side-inner {
+    width: 130px;
+    height: 180px;
+  }
+  .card-center {
+    width: 160px;
+    height: 220px;
+  }
+}
+
+/* ==========================================================================
+   9. BOOTSTRAP CUSTOM THEMING (Dark Luxury Cultural Heritage)
+   ========================================================================== */
+.modal-backdrop.show {
+  opacity: 0.75;
+  backdrop-filter: blur(8px);
+  background-color: #0b0d0e;
+}
+
+.modal-content.custom-modal {
+  background: #17191c;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-xl);
+  color: var(--text-primary);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px var(--gold-glow);
+  overflow: hidden;
+}
+
+.custom-modal .modal-header {
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 22px 28px;
+}
+
+.custom-modal .modal-title {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.custom-modal .modal-body {
+  padding: 28px;
+}
+
+.custom-modal .modal-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 16px 28px;
+}
+
+.modal-char-img {
+  max-height: 280px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 25px rgba(210, 159, 34, 0.25));
+}
+
+.modal-quote {
+  font-style: italic;
+  color: var(--gold-light);
+  border-left: 3px solid var(--gold-primary);
+  padding: 12px 16px;
+  margin: 16px 0;
+  line-height: 1.6;
+  background: rgba(210, 159, 34, 0.06);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.modal-story-img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
+  border: 1px solid var(--border-subtle);
+}
+
+.tooltip .tooltip-inner {
+  background-color: #17191b !important;
+  color: var(--gold-light) !important;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.bs-tooltip-top .tooltip-arrow::before,
+.bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before {
+  border-top-color: var(--border-gold) !important;
+}
